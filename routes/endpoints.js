@@ -3,15 +3,16 @@ var router = express.Router();
 
 const Endpoint = require('../models/Endpoint');
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+    Endpoint.find({}, function(err, data) {
+        res.json(data);
+    });
 });
 
-router.get('/foo', function(req, res, next) {
+router.post('/', function(req, res, next) {
     var endpoint = new Endpoint({
-        name: "Google",
-        baseUrl: "https://google.com",
+        title: "Google",
+        url: "https://google.com",
         active: true
     });
 
